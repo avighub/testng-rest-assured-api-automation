@@ -1,4 +1,4 @@
-package com.techiewolf.utility.faker;
+package com.techiewolf.utility;
 
 import java.util.List;
 import java.util.Random;

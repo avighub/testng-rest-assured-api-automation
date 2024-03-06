@@ -15,30 +15,21 @@ public interface EnvironmentConfig extends Config {
    * Everytime there is a new key added to Environment properties file ensure to add it here.
    * Similarly remove from here if there is a need.
    */
-  @Key("webLoginPageUrl")
-  String webLoginPageUrl();
+  @Key("baseUrl")
+  String baseUrl();
 
-  @Key("apiBaseUrl")
-  String apiBaseUrl();
+  @Key("auth")
+  String auth();
 
-  @Key("username")
-  String username();
+  @Key("get-booking")
+  String getBooking();
 
-  @Key("password")
-  String password();
+  @Key("get-booking-by-id")
+  String getBookingById();
 
-  @Key("avatar")
-  String avatar();
+  @Key("create-booking")
+  String createBooking();
 
-  @Key("login")
-  String login();
-
-  @Key("logout")
-  String logout();
-
-  @Key("users")
-  String users();
-
-  @Key("resetDb")
-  String resetDb();
+  @Key("update-booking")
+  String updateBooking();
 }
