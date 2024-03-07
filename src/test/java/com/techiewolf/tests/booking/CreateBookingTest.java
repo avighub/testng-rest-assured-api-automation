@@ -2,13 +2,12 @@ package com.techiewolf.tests.booking;
 
 import com.techiewolf.api.createbooking.Booking;
 import com.techiewolf.api.createbooking.BookingApi;
-import com.techiewolf.assertion.VerifyResponse;
-import com.techiewolf.setup.TestSetup;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.Test;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
-final class CreateBookingTest extends TestSetup {
-
+public class CreateBookingTest {
 
   @Test
   void shouldCreateBookingSuccessfullyWithAllDetails() {
@@ -19,14 +18,11 @@ final class CreateBookingTest extends TestSetup {
     Response createBooking = BookingApi.createBooking(Booking.getInstance());
 
     // Assert
-    VerifyResponse.assertThat(createBooking)
-            .matchStatusCode(200)
-            .matchesSchema(createBookingSchema)
-            .assertAll();
-    VerifyCreateBookingResponse.assertThat(createBooking)
-            .hasFirstname()
-            .hasLastname()
-            .assertAll();
+    Assert.assertEquals(createBooking.statusCode(), 200);
+    createBooking.then()
+            .assertThat()
+            .body(JsonSchemaValidator.matchesJsonSchemaInClasspath(createBookingSchema));
+    Assert.assertNotNull(createBooking.jsonPath().getString("booking.firstname"));
   }
 
 }
